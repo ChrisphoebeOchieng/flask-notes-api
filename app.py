@@ -41,7 +41,8 @@ def signup():
 def login():
     data = request.get_json()
 
-    
+    if not data or 'username' not in data or 'password' not in data:
+        return {"error": "Username and password are required"}, 400
     
     user = User.query.filter_by(username=data['username']).first()
     

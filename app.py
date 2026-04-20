@@ -59,7 +59,11 @@ def login():
 
 
 
-
+@app.route('/notes', methods=['POST'])
+@jwt_required()
+def create_note():
+    user_id = get_jwt_identity()
+    data = request.get_json()
 
     if not data or 'title' not in data or 'content' not in data:
         return {"error": "Title and content required"}, 400
